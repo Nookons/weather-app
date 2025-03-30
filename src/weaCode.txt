@@ -1,0 +1,39 @@
+// Функция для получения координат
+function getUserLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(
+            (position) => {
+                const lat = position.coords.latitude; // Широта
+                const lon = position.coords.longitude; // Долгота
+                console.log(`Широта: ${lat}, Долгота: ${lon}`);
+
+                // Здесь ты можешь передавать эти данные в API запрос
+                fetchWeatherData(lat, lon); // Например, запрашиваем погоду
+            },
+            (error) => {
+                console.error('Ошибка получения местоположения:', error);
+                alert('Не удалось получить местоположение!');
+            }
+        );
+    } else {
+        alert('Geolocation не поддерживается этим браузером.');
+    }
+}
+
+// Пример запроса к API погоды
+function fetchWeatherData(lat: string, lon: string) {
+    const API_KEY = '4d70cd080179becacc711dbcea25f2c7'; // Твой API-ключ
+    const url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
+
+    fetch(url)
+        .then((response) => response.json())
+        .then((data) => {
+            console.log(data); // Данные о текущей погоде
+        })
+        .catch((error) => {
+            console.error('Ошибка при получении данных:', error);
+        });
+}
+
+// Вызов функции для получения координат
+getUserLocation();
