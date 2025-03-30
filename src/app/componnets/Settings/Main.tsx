@@ -2,15 +2,19 @@ import React, { useEffect, useState } from 'react';
 import dayjs from "dayjs";
 import clsx from "clsx";
 
+interface IUser_data {
+    create_time?: number;
+    time_type?: string;
+    degrees_format?: string;
+}
+
 const Main = () => {
     const [theme, setTheme] = useState("light");
-    const [user_settings, setUser_settings] = useState<any | null>(null);
+    const [user_settings, setUser_settings] = useState<IUser_data | null>(null);
 
     const [time_type, setTime_type] = useState("HH");
     const [degrees_format, setDegrees_format] = useState("C");
-    const [speed_format, setSpeed_format] = useState("km");
 
-    // Toggle Time Format
     const toggleSwitchTime = () => {
         const newTimeType = time_type === "HH" ? "hh" : "HH";
         setTime_type(newTimeType);
@@ -21,22 +25,11 @@ const Main = () => {
         localStorage.setItem("user_data", JSON.stringify(updatedSettings));
     };
 
-    // Toggle Degrees Format
     const toggleSwitchDegrees = () => {
         const newDegreesType = degrees_format === "C" ? "F" : "C";
         setDegrees_format(newDegreesType);
 
         const updatedSettings = { ...user_settings, degrees_format: newDegreesType };
-        setUser_settings(updatedSettings);
-
-        localStorage.setItem("user_data", JSON.stringify(updatedSettings));
-    };
-
-    const toggleSwitchSpeed = () => {
-        const newSpeedFormat = speed_format === "km" ? "mi" : "km";
-        setSpeed_format(newSpeedFormat);
-
-        const updatedSettings = { ...user_settings, speed_format: newSpeedFormat };
         setUser_settings(updatedSettings);
 
         localStorage.setItem("user_data", JSON.stringify(updatedSettings));
@@ -125,29 +118,8 @@ const Main = () => {
                         />
                     </button>
                 </div>
-
-                {/*<div
-                    className={clsx("flex justify-between align-middle transition p-4 rounded-2xl", theme !== "light" ? "bg-gray-800" : "bg-gray-100")}>
-                    <h1>
-                        {speed_format === "km" ? 'Kilometers' : 'Miles'}
-                    </h1>
-                    <button
-                        onClick={toggleSwitchSpeed}
-                        className={`w-12 h-6 flex items-center rounded-full p-1 cursor-pointer ${speed_format === "km" ? 'bg-blue-500' : 'bg-gray-300'}`}
-                    >
-                        <div
-                            className={`w-4 h-4 bg-white rounded-full shadow-md transform transition-all duration-300 ease-in-out ${speed_format === "km" ? 'translate-x-6' : ''}`}
-                        />
-                    </button>
-                </div>*/}
             </div>
             <div>
-                {/*<button
-                    onClick={() => window.location.reload()}
-                    className={"bg-indigo-600 text-white w-full p-4 rounded-2xl my-4 cursor-pointer shadow-2xl"}
-                >
-                    Save settings
-                </button>*/}
                 <p className={`text-center text-gray-800 `}>That page was powered by <a href={"https://github.com/Nookons"} className={"text-indigo-600 font-bold cursor-pointer"}>Nookon</a></p>
             </div>
         </div>

@@ -3,8 +3,9 @@ import React, {useEffect, useState} from 'react';
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
 import Main from "@/app/componnets/Settings/Main";
-
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle, TransitionChild } from '@headlessui/react'
+import Image from 'next/image'
+import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
+import {IWeatherData} from "@/app/types/weather";
 
 const Header = () => {
     const [open, setOpen] = useState(false)
@@ -54,7 +55,7 @@ const Header = () => {
                                     <div className="px-4 sm:px-6">
                                         <DialogTitle className="text-base flex justify-end align-middle gap-2 font-semibold text-gray-900">
                                             <h4>Close</h4>
-                                            <img className={"cursor-pointer"} onClick={() => setOpen(false)} src="/ico/disabled_by_default_24dp.svg" alt=""/>
+                                            <Image width={22} height={22} className={"cursor-pointer"} onClick={() => setOpen(false)} src="/ico/disabled_by_default_24dp.svg" alt=""/>
                                         </DialogTitle>
                                     </div>
                                     <div className="relative mt-6 flex-1 px-4 sm:px-6">
@@ -69,11 +70,11 @@ const Header = () => {
             <div
                 className="bg-white/30 flex justify-between align-middle w-full p-4 rounded-xl backdrop-blur-lg shadow-lg">
                 <h1 className={"flex justify-start gap-2 align-middle text-nowrap"}>
-                    <img src="/ico/humidity_percentage_24dp.svg" alt=""/>
+                    <Image width={22} height={22} src="/ico/humidity_percentage_24dp.svg" alt=""/>
                     {weather.name} {weather.sys.country}
                 </h1>
                 <button onClick={() => setOpen(true)}>
-                    <img className={"bg-transparent rounded cursor-pointer transition  hover:bg-sky-100"}
+                    <Image width={22} height={22} className={"bg-transparent rounded cursor-pointer transition  hover:bg-sky-100"}
                          src="/ico/tune_24dp.svg" alt="Settings ico"/>
                 </button>
             </div>

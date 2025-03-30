@@ -4,6 +4,7 @@ import SkeletonText from "@/app/componnets/SkeletonText";
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import {kelvinToCelsius} from "@/app/utils/kelvinToCelsius";
 import {kelvinToFahrenheit} from "@/app/utils/kelvinToFahrenheit";
+import {IWeatherData} from "@/app/types/weather";
 
 const Temperature = () => {
     const [weather, setWeather] = useState<IWeatherData | null>(null);

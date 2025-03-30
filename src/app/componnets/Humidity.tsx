@@ -1,6 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
+import Image from 'next/image'
+import {IWeatherData} from "@/app/types/weather";
 
 const Humidity = () => {
     const [weather, setWeather] = useState<IWeatherData | null>(null);
@@ -31,7 +33,7 @@ const Humidity = () => {
     return (
         <div className="bg-white/30 w-full p-4 rounded-xl backdrop-blur-lg shadow-lg">
             <h1 className={"flex justify-start gap-2 align-middle text-nowrap"}>
-                <img src="/ico/humidity_percentage_24dp.svg" alt=""/>
+                <Image width={22} height={22} src="/ico/humidity_percentage_24dp.svg" alt=""/>
                 Humidity
             </h1>
             <h4 className={"text-4xl mt-2"}>{weather.main.humidity} %</h4>

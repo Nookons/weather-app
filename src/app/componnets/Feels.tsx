@@ -3,6 +3,8 @@ import {kelvinToCelsius} from "@/app/utils/kelvinToCelsius";
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
 import {kelvinToFahrenheit} from "@/app/utils/kelvinToFahrenheit";
+import Image from 'next/image'
+import {IWeatherData} from "@/app/types/weather";
 
 function getDescription(weather: IWeatherData, deg_format: string) {
     const tempMin = weather.main.temp_min;
@@ -65,7 +67,7 @@ const Feels = () => {
 
     return (
         <div className="bg-white/30 w-full p-4 rounded-xl backdrop-blur-lg shadow-lg">
-            <h1 className={"flex justify-start gap-2 align-middle text-nowrap"}><img src="/ico/device_thermostat_24dp.svg" alt=""/> Feels Like</h1>
+            <h1 className={"flex justify-start gap-2 align-middle text-nowrap"}><Image width={22} height={22} src="/ico/device_thermostat_24dp.svg" alt=""/> Feels Like</h1>
             <h4 className={"text-xl md:text-6xl mt-4"}>{feels}</h4>
             <h4 className={"text-indigo-400 md:text-2xl"}>Actual: {current}</h4>
             <p className={"text-xs"}>{getDescription(weather, deg_format)}</p>

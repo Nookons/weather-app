@@ -1,11 +1,11 @@
-interface IWeather {
+export interface IWeather {
     id: number;
     main: string;
     description: string;
     icon: string;
 }
 
-interface IMain {
+export interface IMain {
     temp: number;
     feels_like: number;
     temp_min: number;
@@ -16,16 +16,16 @@ interface IMain {
     grnd_level: number;
 }
 
-interface IWind {
+export interface IWind {
     speed: number;
     deg: number;
 }
 
-interface IClouds {
+export interface IClouds {
     all: number;
 }
 
-interface ISys {
+export interface ISys {
     type: number;
     id: number;
     country: string;
@@ -33,7 +33,7 @@ interface ISys {
     sunset: number;
 }
 
-interface IWeatherData {
+export interface IWeatherData {
     coord: {
         lon: number;
         lat: number;

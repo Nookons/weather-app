@@ -2,6 +2,8 @@ import React, {useEffect, useState} from 'react';
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
 import dayjs from "dayjs";
+import Image from 'next/image'
+import {IWeatherData} from "@/app/types/weather";
 
 const Sunset = () => {
     const [weather, setWeather] = useState<IWeatherData | null>(null);
@@ -51,7 +53,7 @@ const Sunset = () => {
         <div className="bg-white/30 flex flex-col justify-start w-full p-4 rounded-xl backdrop-blur-lg shadow-lg">
             <h1 className={"flex justify-between gap-2 align-middle text-nowrap"}>
                 <div className={"flex justify-center align-middle gap-2"}>
-                    <img src="/ico/wb_twilight_24dp.svg" alt=""/>
+                    <Image width={22} height={22} src="/ico/wb_twilight_24dp.svg" alt=""/>
                     SunSet
                 </div>
             </h1>

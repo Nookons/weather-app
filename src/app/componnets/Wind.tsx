@@ -1,7 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {kelvinToCelsius} from "@/app/utils/kelvinToCelsius";
 import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
+import Image from 'next/image'
+import {IWeatherData} from "@/app/types/weather";
 
 const getWindDirection = (deg: number) => {
     if (deg >= 337.5 || deg < 22.5) return "N";
@@ -51,7 +52,7 @@ const Wind = () => {
     return (
         <div className="bg-white/30 col-span-2 w-full p-4 rounded-xl backdrop-blur-lg shadow-lg">
             <h1 className={"flex justify-start gap-2 align-middle text-nowrap"}>
-                <img src="/ico/airwave_24dp.svg" alt=""/>
+                <Image width={22} height={22} src="/ico/airwave_24dp.svg" alt=""/>
                 Wind
             </h1>
             <div className={"grid mt-2 grid-cols-3 gap-2"}>
@@ -68,7 +69,9 @@ const Wind = () => {
                 <div className="flex justify-center w-full h-full items-center">
                     <div className="relative w-full h-full rounded-full flex items-center justify-center">
                         <div className="absolute inset-0 flex items-center justify-center">
-                            <img
+                            <Image
+                                width={22}
+                                height={22}
                                 style={{transform: `rotate(${deg}deg)`}} // Поворот стрелки в зависимости от угла
                                 className="w-16 transition duration-500 ease-in-out"
                                 src="/ico/keyboard_double_arrow_down_24dp.svg"

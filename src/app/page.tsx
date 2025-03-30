@@ -1,8 +1,6 @@
 "use client";
 
-import Button from "@/app/componnets/Button";
-import Link from "next/link";
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import dayjs from "dayjs";
 import Temperature from "@/app/componnets/Temperature";
 import Forecast from "@/app/componnets/Forecast";
@@ -14,6 +12,7 @@ import Humidity from "@/app/componnets/Humidity";
 import Pressure from "@/app/componnets/Pressure";
 import Header from "@/app/componnets/Header";
 import {getUserLocation} from "@/app/utils/getUserLocation";
+import {IWeatherData} from "@/app/types/weather";
 
 function saveWeatherToLocalStorage(weatherData: IWeatherData) {
     const timestamp = dayjs().valueOf();

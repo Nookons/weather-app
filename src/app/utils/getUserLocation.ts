@@ -1,4 +1,5 @@
 import {fetchWeatherData} from "@/app/utils/getWeatherData";
+import {IWeatherData} from "@/app/types/weather";
 
 export function getUserLocation(): Promise<IWeatherData | null> {
     return new Promise((resolve, reject) => {
