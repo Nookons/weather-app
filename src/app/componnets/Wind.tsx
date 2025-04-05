@@ -1,8 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
+import React from 'react';
 import Skeleton from "@/app/componnets/Skeleton";
 import Image from 'next/image'
-import {IWeatherData} from "@/app/types/weather";
+import {useAppSelector} from "@/app/hooks/storeHooks";
 
 const getWindDirection = (deg: number) => {
     if (deg >= 337.5 || deg < 22.5) return "N";
@@ -16,37 +15,20 @@ const getWindDirection = (deg: number) => {
 };
 
 const Wind = () => {
-    const [weather, setWeather] = useState<IWeatherData | null>(null);
-
+    const {weather, loading} = useAppSelector(state => state.weather)
     const speed = weather?.wind.speed || 0
     const deg = weather?.wind.deg || 0
 
     const speedInMph = speed * 2.23694; // скорость в милях в час
-
     const direction = getWindDirection(deg);
 
-    useEffect(() => {
-        const updateWeatherAndUserData = () => {
-            const storedWeather = getWeatherFromLocalStorageSimple();
 
-            if (storedWeather) {
-                setWeather(storedWeather); // Обновляем данные о погоде
-            }
-        };
-
-        updateWeatherAndUserData();
-
-        const intervalId = setInterval(() => {
-            updateWeatherAndUserData();
-        }, 1000);
-
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
-
-    if (!weather) {
-        return <Skeleton height={40}/>
+    if (loading || !weather) {
+        return (
+            <div className={"col-span-2"}>
+                <Skeleton height={130}/>
+            </div>
+        )
     }
 
     return (

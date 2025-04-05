@@ -1,40 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
+import React from 'react';
 import Skeleton from "@/app/componnets/Skeleton";
 import Image from 'next/image'
-import {IWeatherData} from "@/app/types/weather";
+import {useAppSelector} from "@/app/hooks/storeHooks";
 
 const Visibility = () => {
-    const [weather, setWeather] = useState<IWeatherData | null>(null);
+    const {weather, loading} = useAppSelector(state => state.weather)
 
     const visibility = weather?.visibility || 0;
 
     const visibilityKm = visibility / 1000;
     const visibilityMiles = (visibility * 0.000621371).toFixed(2);
 
-
-
-    useEffect(() => {
-        const updateWeatherAndUserData = () => {
-            const storedWeather = getWeatherFromLocalStorageSimple();
-
-            if (storedWeather) {
-                setWeather(storedWeather); // Обновляем данные о погоде
-            }
-        };
-
-        updateWeatherAndUserData();
-
-        const intervalId = setInterval(() => {
-            updateWeatherAndUserData();
-        }, 1000);
-
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
-    if (!weather) {
-        return <Skeleton height={40} />
+    if (loading || !weather) {
+        return <Skeleton height={156} />
     }
 
     return (

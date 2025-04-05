@@ -1,39 +1,20 @@
 'use client'
-import React, {useEffect, useState} from 'react';
-import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
+import React, {useState} from 'react';
 import Skeleton from "@/app/componnets/Skeleton";
 import Main from "@/app/componnets/Settings/Main";
 import Image from 'next/image'
 import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import {IWeatherData} from "@/app/types/weather";
+import {useAppSelector} from "@/app/hooks/storeHooks";
 
 const Header = () => {
     const [open, setOpen] = useState(false)
-    const [weather, setWeather] = useState<IWeatherData | null>(null);
+    const {weather, loading} = useAppSelector(state => state.weather)
 
-    useEffect(() => {
-        const updateWeatherAndUserData = () => {
-            const storedWeather = getWeatherFromLocalStorageSimple();
 
-            if (storedWeather) {
-                setWeather(storedWeather); // Обновляем данные о погоде
-            }
-        };
-
-        updateWeatherAndUserData();
-
-        const intervalId = setInterval(() => {
-            updateWeatherAndUserData();
-        }, 1000);
-
-        return () => {
-            clearInterval(intervalId);
-        };
-    }, []);
-
-    if (!weather) {
-        return <Skeleton height={40} />
+    if (loading || !weather) {
+        return <Skeleton height={56} />
     }
+
 
     return (
         <>

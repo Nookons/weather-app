@@ -1,8 +1,11 @@
 import React from 'react';
 
-const Skeleton = ({height}: {height: number}) => {
+const Skeleton = ({ height = 60 }: { height?: number }) => {
     return (
-        <div className={`w-full h-${height || 60} bg-gray-100 my-2 opacity-10 animate-pulse rounded`}></div>
+        <div
+            style={{ height }}
+            className="w-full block z-50 bg-gray-100 opacity-10 animate-pulse rounded"
+        ></div>
     );
 };
 

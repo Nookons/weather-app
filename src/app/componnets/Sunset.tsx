@@ -1,13 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import {getWeatherFromLocalStorageSimple} from "@/app/utils/getWeather";
 import Skeleton from "@/app/componnets/Skeleton";
 import dayjs from "dayjs";
 import Image from 'next/image'
-import {IWeatherData} from "@/app/types/weather";
+import {useAppSelector} from "@/app/hooks/storeHooks";
 
 const Sunset = () => {
-    const [weather, setWeather] = useState<IWeatherData | null>(null);
-
+    const {weather, loading} = useAppSelector(state => state.weather)
     const [time_type, setTime_type] = useState("HH")
 
     const sunset = weather?.sys.sunset || 0
@@ -18,24 +16,19 @@ const Sunset = () => {
 
 
     useEffect(() => {
-        const updateWeatherAndUserData = () => {
+        const updateUserData = () => {
             const user_data = localStorage.getItem("user_data");
-            const storedWeather = getWeatherFromLocalStorageSimple();
 
             if (user_data) {
                 const parsedUserData = JSON.parse(user_data); // Преобразуем в объект
                 setTime_type(parsedUserData.time_type); // Обновляем формат градусов
             }
-
-            if (storedWeather) {
-                setWeather(storedWeather); // Обновляем данные о погоде
-            }
         };
 
-        updateWeatherAndUserData();
+        updateUserData();
 
         const intervalId = setInterval(() => {
-            updateWeatherAndUserData();
+            updateUserData();
         }, 1000);
 
         return () => {
@@ -45,8 +38,8 @@ const Sunset = () => {
 
 
 
-    if (!weather) {
-        return <Skeleton height={40}/>
+    if (loading || !weather) {
+        return <Skeleton height={156}/>
     }
 
     return (

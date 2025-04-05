@@ -1,7 +1,4 @@
-import {fetchWeatherData} from "@/app/utils/getWeatherData";
-import {IWeatherData} from "@/app/types/weather";
-
-export function getUserLocation(): Promise<IWeatherData | null> {
+export function getUserLocation(): Promise<{ lat: number; lon: number } | null> {
     return new Promise((resolve, reject) => {
         if (!navigator.geolocation) {
             alert("Geolocation не поддерживается этим браузером.");
@@ -9,17 +6,10 @@ export function getUserLocation(): Promise<IWeatherData | null> {
         }
 
         navigator.geolocation.getCurrentPosition(
-            async (position) => {
+            (position) => {
                 const lat = position.coords.latitude;
                 const lon = position.coords.longitude;
-
-                try {
-                    const weatherData = await fetchWeatherData(lat.toString(), lon.toString());
-                    resolve(weatherData);
-                } catch (error) {
-                    console.error("Ошибка при получении погоды:", error);
-                    reject(null);
-                }
+                resolve({ lat, lon });
             },
             (error) => {
                 console.error("Ошибка получения местоположения:", error);
