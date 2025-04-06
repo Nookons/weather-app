@@ -57,15 +57,13 @@ const Forecast = () => {
                                 <p className={"inline"}>{date.format("ddd")}</p>
                             </div>
                             <Image
-                                src={`https://openweathermap.org/img/wn/${iconCode}@4x.png`}  // Используем 4x для высококачественной иконки
+                                src={`https://openweathermap.org/img/wn/${iconCode}@4x.png`}
                                 alt={description}
-                                width={50}  // Можете настроить размеры под 4x
+                                width={50}
                                 height={50}
                             />
 
-                            <div className={"col-span-2 grid grid-cols-6 gap-2 max-w-full items-center"}>
-                                <p className={'text-left'}>{item.main.temp_min.toFixed()}°</p>
-
+                            <div className={"col-span-2 grid grid-cols-5 gap-2 max-w-full items-center"}>
                                 <div className="flex-grow col-span-4 flex justify-center">
                                     <div className="w-full bg-gray-200 h-2 rounded-2xl">
                                         <div
@@ -85,8 +83,9 @@ const Forecast = () => {
             </ul>
             <div className={"w-full"}>
                 {view_value === 3
-                    ? <button onClick={() => setView_value(9)} className={"w-full flex justify-center align-middle border-t pt-2"}>
+                    ? <button onClick={() => setView_value(9)} className={"w-full group  cursor-pointer  transition flex justify-center align-middle border-t py-1"}>
                         <Image
+                            className={`group-hover:scale-110`}
                             src={`/ico/more_horiz_24dp.svg`}
                             alt={"More ico"}
                             width={24}
@@ -94,8 +93,9 @@ const Forecast = () => {
                         />
                     </button>
                     : <button onClick={() => setView_value(3)}
-                              className={"w-full flex justify-center align-middle border-t pt-2"}>
+                              className={"w-full group  cursor-pointer transition flex justify-center align-middle border-t py-1"}>
                         <Image
+                            className={`group-hover:scale-110`}
                             src={`/ico/hide_24dp.svg`}
                             alt={"More ico"}
                             width={24}

@@ -50,7 +50,7 @@ const Sunset = () => {
                     SunSet
                 </div>
             </h1>
-            <h4 className={"text-2xl md:text-6xl mt-4"}>
+            <h4 className={"text-2xl md:text-4xl mt-4"}>
                 {sunsetTime.slice(0, 5)}
                 {time_type == "HH" || (<span className={"text-xs ml-1"}>PM</span>)}
             </h4>

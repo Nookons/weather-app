@@ -20,6 +20,14 @@ export default function Home() {
     const dispatch = useAppDispatch();
 
     useEffect(() => {
+        const save_theme = localStorage.getItem("theme")
+
+        if (save_theme) {
+            document.documentElement.classList.add(save_theme)
+        }
+    }, [])
+
+    useEffect(() => {
         const fetchForecast = async () => {
             const coords = await getUserLocation();
             if (coords) {
@@ -34,15 +42,19 @@ export default function Home() {
     return (
         <div className="p-2">
             <Header />
-            <Temperature />
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-2 my-4 auto-rows-auto">
-                <Forecast />
-                <Feels />
-                <Sunset />
-                <Wind />
-                <Visibility />
-                <Humidity />
-                <Pressure />
+            <div className={`sm:grid sm:grid-cols-2 sm:gap-4`}>
+                <div className={`my-4 flex flex-col gap-2`}>
+                    <Temperature />
+                    <Forecast />
+                </div>
+                <div className="grid grid-cols-2 sm:grid-cols-1 gap-2 my-4 auto-rows-auto">
+                    <Feels />
+                    <Sunset />
+                    <Wind />
+                    <Visibility />
+                    <Humidity />
+                    <Pressure />
+                </div>
             </div>
         </div>
     );

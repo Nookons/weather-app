@@ -14,7 +14,7 @@ const Temperature = () => {
     }
 
     return (
-        <div className={"grid sm:grid-cols-2 mt-2"}>
+        <div className={"bg-white/30 col-span-2 grid grid-cols-1 align-middle justify-center w-full p-4 rounded-xl backdrop-blur-lg shadow-lg w-96"}>
             <div>
                 <h1 className={'text-center text-6xl my-2'}>{weather?.name}</h1>
                 <h2 className={'text-8xl text-center my-2'}><>{weather.main.temp.toFixed()}°</>
